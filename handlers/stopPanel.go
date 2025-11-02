@@ -1,11 +1,13 @@
 package handlers
 
 import (
+	"os"
+
 	"github.com/gin-gonic/gin"
 )
 
-func HomeHandler() gin.HandlerFunc {
+func StopPanelHandler() gin.HandlerFunc {
 	return func(c *gin.Context) {
-		c.HTML(200, "index.tmpl", gin.H{})
+		os.Exit(0)
 	}
 }

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minecraft Management Thingy</title>
+    <link rel="stylesheet" href="/static/static/simple.min.css">
+</head>
+<body>
+<button id="kickAllButton">Kick All Players</button>    
+</body>
+<script>
+    document.getElementById('kickAllButton').addEventListener('click', function() {
+        fetch('/admin/kickall', {
+            method: 'POST',
+        })
+        .then(response => {
+            if (response.ok) {
+                alert('All players have been kicked.');
+                window.close();
+            } else {
+                alert('Error kicking players.');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    });
+</script>
+</html>
