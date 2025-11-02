@@ -7,10 +7,10 @@ import (
 	"github.com/gorcon/rcon"
 )
 
-func InitRCON() {
-	conn, err := rcon.Dial(os.Getenv("RCON_SRV"), os.Getenv("RCON_PORT"))
+func InitRCON() (*rcon.Conn) {
+	conn, err := rcon.Dial(os.Getenv("RCON_SRV"), os.Getenv("RCON_PASSWORD"))
 	if err != nil {
 		log.Fatal(err)
 	}
-	defer conn.Close()
+	return conn
 }
