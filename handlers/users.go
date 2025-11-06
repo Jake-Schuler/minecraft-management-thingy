@@ -60,3 +60,19 @@ func KickAllPlayersHandler(rconConn *rcon.Conn) gin.HandlerFunc {
 		c.JSON(http.StatusOK, gin.H{"status": "success"})
 	}
 }
+func ForceLoginHandler(rconConn *rcon.Conn) gin.HandlerFunc {
+	return func(c *gin.Context) {
+		var req struct {
+			Username string `json:"username"`
+		}
+		if err := c.ShouldBindJSON(&req); err != nil {
+			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+			return
+		}
+		if err := services.ForceLoginPlayer(rconConn, req.Username); err != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+			return
+		}
+		c.JSON(http.StatusOK, gin.H{"status": "success"})
+	}
+}

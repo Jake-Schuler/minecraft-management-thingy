@@ -27,3 +27,9 @@ func KickPlayerPageHandler() gin.HandlerFunc {
 		c.HTML(200, "kickplayer.tmpl", gin.H{})
 	}
 }
+
+func ForceLoginPageHandler() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		c.HTML(200, "forcelogin.tmpl", gin.H{})
+	}
+}

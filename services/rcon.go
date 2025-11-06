@@ -158,3 +158,8 @@ func KickPlayer(conn *rcon.Conn, username string) error {
 	_, err := conn.Execute("minecraft:kick " + username)
 	return err
 }
+
+func ForceLoginPlayer(conn *rcon.Conn, username string) error {
+	_, err := conn.Execute("authme forcelogin " + username)
+	return err
+}

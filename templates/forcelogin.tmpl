@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minecraft Management Thingy</title>
+    <link rel="stylesheet" href="/static/static/simple.min.css">
+</head>
+<body>
+    <form id="forceLoginForm">
+        <label for="username">Username:</label>
+        <select id="username" name="username" required>
+            
+        </select>
+        <button type="submit">Force Login</button>
+    </form>
+</body>
+<script>
+    fetch('/admin/users')
+        .then(response => response.json())
+        .then(data => {
+            sortedUsers = data;
+            sortedUsers.sort((a, b) => a.localeCompare(b));
+            const usernameSelect = document.getElementById('username');
+            sortedUsers.forEach(user => {
+                const option = document.createElement('option');
+                option.value = user;
+                option.textContent = user;
+                usernameSelect.appendChild(option);
+            });
+        })
+        .catch(error => {
+            console.error('Error fetching whitelist data:', error);
+        });
+    document.getElementById('forceLoginForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        const username = document.getElementById('username').value;
+        fetch('/admin/force-login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ username: username }),
+        })
+        .then(response => {
+            if (response.ok) {
+                alert('Player forced to login successfully');
+                window.close();
+            } else {
+                alert('Error forcing player to login');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    });
+</script>
+</html>

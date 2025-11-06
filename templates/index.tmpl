@@ -12,6 +12,7 @@
         <li><a id="passreset" href="#">reset user's password</a></li>
         <li><a id="kickall" href="#">kick all players</a></li>
         <li><a id="kickplayer" href="#">kick a player</a></li>
+        <li><a id="forcelogin" href="#">force a player to login</a></li>
     </ul>
 </body>
     <script>
@@ -23,6 +24,9 @@
         });
         document.getElementById('kickplayer').addEventListener('click', function() {
             window.open('/admin/kick-player', 'Kick Player', 'width=400,height=300');
+        });
+        document.getElementById('forcelogin').addEventListener('click', function() {
+            window.open('/admin/force-login', 'Force Login', 'width=400,height=200');
         });
     </script>
 </html>

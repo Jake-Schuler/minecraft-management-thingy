@@ -21,4 +21,6 @@ func SetupRoutes(r *gin.Engine, rconConn *rcon.Conn) {
 	authorized.POST("/reset-password", ResetUserPassHandler(rconConn))
 	authorized.GET("/kick-player", KickPlayerPageHandler())
 	authorized.POST("/kick-player", KickPlayerHandler(rconConn))
+	authorized.GET("/force-login", ForceLoginPageHandler())
+	authorized.POST("/force-login", ForceLoginHandler(rconConn))
 }
